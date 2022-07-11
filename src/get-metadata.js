@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 // Note: Please do not use JSDOM or any other external library/package (sorry)
 /*
 type Metadata = {
@@ -74,8 +75,6 @@ export default function getMetadata(htmlOld) {
     keywords = keyword;
   }
 
-
-
   const siteNamefinal = html?.match(regeXsitename)
     ? html?.match(regeXsitename)[0]
     : null;
@@ -86,9 +85,6 @@ export default function getMetadata(htmlOld) {
           .substring(siteNamefinal.indexOf("content") + 9)
           .slice(0, -2)
     : null;
-
-
-
 
   const descriptionfinal = html?.match(regeXdescription)
     ? html?.match(regeXdescription)[0]
@@ -104,14 +100,11 @@ export default function getMetadata(htmlOld) {
           .slice(0, -2)
     : null;
 
-
-
   const title = html?.match(regeXtitle)
     ? html?.match(regeXtitle)[0]
     : html?.match(regexTitle)
     ? html?.match(regexTitle)[0]
     : null || null;
-
 
   const authorfinal = html?.match(regeXauthor)
     ? html.match(regeXauthor)[0]
@@ -122,23 +115,20 @@ export default function getMetadata(htmlOld) {
       : authorfinal.substring(authorfinal.indexOf("content") + 9).slice(0, -2)
     : null;
 
-
   const finalurl = url ? url.replace('"', "").replace(" ", "") : url;
   const finaldescription = description
     ? description.replace('."', ".")
     : description;
 
-
   const finalAuthor = author ? author.replace('" ', "") : author;
 
-  
   const finalSitename = siteName ? siteName.replace('" ', "") : siteName;
   return {
-    url: finalurl ? finalurl : url,
+    url: finalurl || url,
     title,
-    description: finaldescription ? finaldescription : description,
-    keywords: keywords,
-    author: finalAuthor ? finalAuthor : author,
-    siteName: finalSitename ? finalSitename : siteName,
+    description: finaldescription || description,
+    keywords,
+    author: finalAuthor || author,
+    siteName: finalSitename || siteName,
   };
 }

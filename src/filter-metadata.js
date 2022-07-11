@@ -1,3 +1,11 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-constant-condition */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-loop-func */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /*
 type Metadata = {
   url: string | null;
@@ -22,7 +30,6 @@ type Metadata = {
  * @returns {Metadata[]} - An array of Metadata objects that match the given search query
  */
 export default function filterMetadata(metadata, query) {
-  const dataToBeSearched = metadata;
   const searchData = query;
 
   let array = [];
@@ -32,7 +39,7 @@ export default function filterMetadata(metadata, query) {
   if (!metadata || typeof query !== "string") {
     return array;
   }
-  const finaldata = metadata.map((data) => {
+  metadata.forEach((data) => {
     const finalData = data;
     const searchFinalData = data;
 
@@ -48,7 +55,7 @@ export default function filterMetadata(metadata, query) {
                 .replaceAll(", ,", ",")
                 .split(",");
               const searchContent = element.toLowerCase().replaceAll(".", "");
-              searchKey.map((data) => {
+              searchKey.forEach((data) => {
                 if (searchContent.includes(data)) {
                   array.push(finalData);
                 }
@@ -64,12 +71,12 @@ export default function filterMetadata(metadata, query) {
           .replaceAll(", ,", ",")
           .split(",");
 
-        const searchContent = typeof searchFinalData[data]
+        const searchContent = searchFinalData[data]
           ? searchFinalData[data].toLowerCase().replaceAll(".", "")
           : "";
 
-        searchKey.map((data) => {
-          if (searchContent.includes(data)) {
+        searchKey.forEach((finalKeyData) => {
+          if (searchContent.includes(finalKeyData)) {
             array.push(finalData);
           }
         });
@@ -87,8 +94,8 @@ export default function filterMetadata(metadata, query) {
         ? searchFinalData[data].toLowerCase().replaceAll(".", "")
         : "";
 
-      searchKey.map((data) => {
-        if (searchContent?.includes(data)) {
+      searchKey.forEach((finalSearchKey) => {
+        if (searchContent?.includes(finalSearchKey)) {
           array.push(finalData);
         }
       });
