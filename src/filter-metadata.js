@@ -23,78 +23,77 @@ type Metadata = {
  */
 export default function filterMetadata(metadata, query) {
   const dataToBeSearched = metadata;
-  const searchData = query
-  // console.log("ndcjcndjcbdjsbcdjsbcjdbcjdsb",searchData);
-  let array =[]
-  if(!query && metadata){
-    return metadata
+  const searchData = query;
+
+  let array = [];
+  if (!query && metadata) {
+    return metadata;
   }
-  if(!metadata || typeof query !== 'string'){
-    return array
+  if (!metadata || typeof query !== "string") {
+    return array;
   }
- const finaldata= metadata.map((data)=>{
-  const finalData=data
-  const searchFinalData=data
-  // console.log(searchData);
-    for(data in finalData){
+  const finaldata = metadata.map((data) => {
+    const finalData = data;
+    const searchFinalData = data;
 
-      if(typeof searchFinalData[data]==="object"){
-        searchFinalData[data]?searchFinalData[data].forEach(element => {
-          const searchKey = searchData.toLowerCase().replaceAll(".","").replaceAll(" "," ,").replaceAll("-"," ,",).replaceAll(", ,",",").split(",");
-          const searchContent = element.toLowerCase().replaceAll(".","");
-          searchKey.map(data=>{
-            // console.log("46....",data);
-            if(searchContent.includes(data)){
-              console.log("BBCHDBCHS");
-              array.push(finalData)
-            }
-          })
-          // console.log("44",searchKey)
-  
-        }):"";
+    for (data in finalData) {
+      if (typeof searchFinalData[data] === "object") {
+        searchFinalData[data]
+          ? searchFinalData[data].forEach((element) => {
+              const searchKey = searchData
+                .toLowerCase()
+                .replaceAll(".", "")
+                .replaceAll(" ", " ,")
+                .replaceAll("-", " ,")
+                .replaceAll(", ,", ",")
+                .split(",");
+              const searchContent = element.toLowerCase().replaceAll(".", "");
+              searchKey.map((data) => {
+                if (searchContent.includes(data)) {
+                  array.push(finalData);
+                }
+              });
+            })
+          : "";
+      } else {
+        const searchKey = searchData
+          .toLowerCase()
+          .replaceAll(".", "")
+          .replaceAll(" ", " ,")
+          .replaceAll("-", " ,")
+          .replaceAll(", ,", ",")
+          .split(",");
 
-      }
-      else{
-        const searchKey = searchData.toLowerCase().replaceAll(".","").replaceAll(" "," ,").replaceAll("-"," ,",).replaceAll(", ,",",").split(",");
-      
-        const searchContent = typeof searchFinalData[data]?searchFinalData[data].toLowerCase().replaceAll(".",""):'';
-      
+        const searchContent = typeof searchFinalData[data]
+          ? searchFinalData[data].toLowerCase().replaceAll(".", "")
+          : "";
 
-        searchKey.map(data=>{
-          // console.log("64",searchContent);
-          // console.log("65",data);
-          if(searchContent.includes(data)){
-            array.push(finalData)
+        searchKey.map((data) => {
+          if (searchContent.includes(data)) {
+            array.push(finalData);
           }
-        })
-
+        });
       }
-      const searchKey = searchData.toLowerCase().replaceAll(" "," ,").replaceAll("-"," ,",).replaceAll(", ,",",").replaceAll(" ,",",").split(",");
-      const searchContent = searchFinalData?searchFinalData[data]:""?searchFinalData[data].toLowerCase().replaceAll(".",""):'';
-      console.log("74",searchKey);
+      const searchKey = searchData
+        .toLowerCase()
+        .replaceAll(" ", " ,")
+        .replaceAll("-", " ,")
+        .replaceAll(", ,", ",")
+        .replaceAll(" ,", ",")
+        .split(",");
+      const searchContent = searchFinalData
+        ? searchFinalData[data]
+        : ""
+        ? searchFinalData[data].toLowerCase().replaceAll(".", "")
+        : "";
 
-    
-
-      searchKey.map(data=>{
-        // console.log("78hbhbwbd", searchContent);
-        // console.log("79bchbch",data ,typeof data);
-        // console.log(data.tr().length)
-        console.log("80",searchContent?.includes("spencergreenberg"));
-
-        if(searchContent?.includes(data)){
-          console.log("BBCHDBCHS");
-          array.push(finalData)
+      searchKey.map((data) => {
+        if (searchContent?.includes(data)) {
+          array.push(finalData);
         }
-      })
-      // const searchContent = typeof searchFinalData[data]!=="object"?searchFinalData[data].toLowerCase().replaceAll(".",""):'';
-      // if(searchFinalData[data]?searchContent.includes(searchKey):''){
-      //   array.push(finalData)
-      // }
+      });
     }
-  })
-  // console.log(array)
-  // TODO: delete and replace this with your code
-  // console.log(metadata,query)
+  });
   array = [...new Set(array)];
   return array;
 }
